@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Tshirt from '../Tshirt/Tshirt';
 import Cart from '../Cart/Cart';
@@ -6,9 +6,15 @@ import './Home.css'
 
 const Home = () => {
     const shirts = useLoaderData();
+    const [cart,setCart] = useState([]);
 
     const handleAdd = shirt =>{
-        console.log(shirt)
+        const newCart = [...cart,shirt]
+        setCart(newCart)
+    }
+
+    const removeAdd=id=>{
+        console.log(id)
     }
     return (
         <div className='home-container'>
@@ -22,7 +28,9 @@ const Home = () => {
                 }
             </div>
             <div className="cart-container">
-                <Cart></Cart>
+                <Cart cart={cart}
+                removeAdd={removeAdd}
+                ></Cart>
             </div>
         </div>
     );
